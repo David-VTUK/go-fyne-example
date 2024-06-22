@@ -1,7 +1,8 @@
 {
-	"name": "Go-htmx-env",
-	"image": "mcr.microsoft.com/devcontainers/go:1-1.22-bookworm",
+	"name": "Go-fyne-env",
+	//"image": "mcr.microsoft.com/devcontainers/go:1-1.22-bookworm",
 
+	"build": { "dockerfile": "Dockerfile" },
 	// Configure tool-specific properties.
 	"customizations": {
 		// Configure properties specific to VS Code.
@@ -16,7 +17,19 @@
 	},
 
 	// Extra args to enable compatibility between Flatpak vscode and podman
-	"runArgs": ["--userns=keep-id","--network=host"],
+	"runArgs": [
+		"--userns=keep-id",
+		"--network=host"
+	],
+
+	"containerEnv": {
+        "DISPLAY": "unix:0"
+    },
+
+    "mounts": [
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached"
+      ],
+	  
 	"privileged": true,
 	"containerUser": "vscode",
     "workspaceFolder": "/workspace",
